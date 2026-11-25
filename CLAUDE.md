@@ -28,4 +28,5 @@ All game logic lives in `game.js` (loaded as a classic script, `'use strict'`, n
 
 ## Notes
 
-- The README mentions power-ups and a "shooting star" asteroid type; these are **not** implemented in `game.js` yet.
+- **Power-ups** (`PowerUp` entities in `powerUps` array, types in `POWERUP_STYLE`: triple, shield, slow, hyper, nova): each type drops once per game on the `drops[type].at`-th asteroid destroyed (random within `DROP_RANGES`, all distinct), via `destroyAsteroid()`. slow → `slowTimer` 6 s halves asteroid dt (`asteroidDt()`); hyper → `hyperTimer` 8 s boosts THRUST/DRAG/ROT in `Ship.update()`; nova → `novaCharges = 1`, key **B** calls `detonateNova()` (clears all asteroids, no fragments). `resetPowers()` on death/new game. Items stay 15 s; activated via `collectPowerUp()` by touching or shooting them. Triple → `tripleShotTimer = 10` (read by `Ship.tryShoot()`); shield → `shieldTimer = 5`, absorbs one ship-asteroid hit (destroys asteroid, grants 1 s invincibility). Both lost on death.
+- The README's other power-ups and the "shooting star" asteroid type are **not** implemented yet.
